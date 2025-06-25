@@ -1,0 +1,1 @@
+//Lida com as requisições e respostas

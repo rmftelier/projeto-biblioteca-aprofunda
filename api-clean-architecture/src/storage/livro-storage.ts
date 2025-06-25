@@ -1,0 +1,1 @@
+// Armazenamento em memória (Singleton)
