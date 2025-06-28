@@ -21,5 +21,33 @@ export default {
 
   getAllTexts: (): Livro[] => {
     return LivroStorage.getAll();
+  },
+
+  buscarLivro: (id: string): Livro | undefined => {
+    return LivroStorage.getById(id);
+  },
+
+  atualizandoLivro: (id: string, data: LivroData): Livro | null => {
+    const livro = LivroStorage.getById(id);
+
+    if (!livro) {
+      return null;
+    }
+
+    const livroAtualizado: Livro = {
+      ...livro,
+      ...data,
+      published: new Date(data.published)
+    };
+
+    LivroStorage.updateById(id, livroAtualizado);
+
+    return livroAtualizado;
+  },
+
+
+  deleteLivroById: (id: string): Livro[] => {
+    return LivroStorage.deleteBookById(id);
   }
+
 }

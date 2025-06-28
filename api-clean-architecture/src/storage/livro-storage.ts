@@ -22,6 +22,25 @@ class LivroStorage {
   public getAll(): LivroProps[] {
     return this.livros;
   }
+
+  public getById(id: string): Livro | undefined {
+    return this.livros.find((livro) => livro.id === id);
+  }
+
+  public updateById(id: string, livroAtualizado: LivroProps): void {
+    const index = this.livros.findIndex(livro => livro.id === id);
+
+    if (index !== -1) {
+      this.livros[index] = livroAtualizado;
+    }
+  }
+
+  public deleteBookById(id: string): Livro[] {
+    const index = this.livros.findIndex(livro => livro.id === id);
+
+    return this.livros.splice(index, 1);
+  }
+
 }
 
 export default LivroStorage.getInstance();
