@@ -9,7 +9,7 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Endpoints](#endpoints)
-- [Exemplos de Requisição](##exemplos-de-requisição)
+- [Exemplos de Requisição](#exemplos-de-requisição)
 
 ---
 
