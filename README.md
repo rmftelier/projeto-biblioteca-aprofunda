@@ -35,7 +35,7 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 | `idioma`         | string    | Idioma da versão do livro                         |
 
 
-## 🛠 Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - Node.js 
 - Express 
@@ -46,7 +46,7 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 
 ---
 
-## 📦 Instalação 
+## Instalação 
 
 1. Clone o repositório: 
 
@@ -88,7 +88,7 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 
 ---
 
-## 📬 Exemplos de Requisição
+## Exemplos de Requisição
 
 Abaixo alguns exemplos de requisição e resposta utilizando o Postman.
 
