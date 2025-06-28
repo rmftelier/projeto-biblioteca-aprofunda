@@ -4,11 +4,11 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 
 ### 📑 Sumário
 
-- [Funcionalidades](##funcionalidades)
-- [Estrutura de um Livro](###estrutura-de-um-livro)
-- [Tecnologias Utilizadas](##tecnologias-utilizadas)
+- [Funcionalidades](#funcionalidades)
+- [Estrutura de um Livro](#estrutura-de-um-livro)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
-- [Endpoints](##endpoints)
+- [Endpoints](#endpoints)
 - [Exemplos de Requisição](##exemplos-de-requisição)
 
 ---
