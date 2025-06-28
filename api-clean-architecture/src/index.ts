@@ -11,5 +11,5 @@ app.use(cors());
 app.use(routes);
 
 app.listen(PORT, () => {
-  console.log(`O servidor está rodando na porta: ${PORT}`);
+  console.log(`O servidor está rodando na porta: ${PORT}!`);
 });

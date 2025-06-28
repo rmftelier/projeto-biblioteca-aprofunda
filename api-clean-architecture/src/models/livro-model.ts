@@ -1,47 +1,51 @@
-// Classe que define o modelo de Livro
 export interface LivroProps {
   id: string;
-  title: string;
-  author: string;
-  published: Date;
-  format: string;
-  genres: string[];
-  language: string;
+  titulo: string;
+  escritor: string;
+  dataPublicacao: string;
+  formato: string;
+  qtdPaginas: number;
+  generos: string[];
+  idioma: string;
 }
 
 export interface LivroData {
-  title: string;
-  author: string;
-  published: Date;
-  format: string;
-  genres: string[];
-  language: string;
+  titulo: string;
+  escritor: string;
+  dataPublicacao: string;
+  formato: string;
+  qtdPaginas: number;
+  generos: string[];
+  idioma: string;
 }
 
 export class Livro {
   id: string;
-  title: string;
-  author: string;
-  published: Date;
-  format: string;
-  genres: string[];
-  language: string;
+  titulo: string;
+  escritor: string;
+  dataPublicacao: string;
+  formato: string;
+  qtdPaginas: number;
+  generos: string[];
+  idioma: string;
 
   constructor({
     id,
-    title,
-    author,
-    published,
-    format,
-    genres,
-    language
+    titulo,
+    escritor,
+    dataPublicacao,
+    formato,
+    qtdPaginas,
+    generos,
+    idioma
   }: LivroProps) {
     this.id = id;
-    this.title = title;
-    this.author = author;
-    this.published = published;
-    this.format = format;
-    this.genres = genres;
-    this.language = language;
+    this.titulo = titulo;
+    this.escritor = escritor;
+    this.dataPublicacao = dataPublicacao;
+    this.formato = formato;
+    this.qtdPaginas = qtdPaginas;
+    this.generos = generos;
+    this.idioma = idioma;
   }
 }

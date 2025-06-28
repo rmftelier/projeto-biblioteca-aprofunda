@@ -1,33 +1,50 @@
-// Regras de negócio relacionadas aos livros
 import LivroStorage from "../storage/livro-storage";
 import livroFactory from "../factories/livro-factory";
 import { LivroData } from "../models/livro-model";
+import { formataISOParaBR } from "../utils/formata-data";
 
 interface Livro extends LivroData {
   id: string;
 }
 
 export default {
-  criarLivro: ({ title, author, published, format, genres, language }: LivroData): Livro => {
+  listarTodosLivros: (): Livro[] => {
+    return LivroStorage.getAll();
+  },
 
-    const dataConvertida = new Date(published);
+  buscarLivroPorId: (id: string): Livro | undefined => {
+    return LivroStorage.getById(id);
+  },
 
-    const novoLivro = livroFactory.criar({ title, author, published: dataConvertida, format, genres, language });
+  cadastrarNovoLivro: (
+    {
+      titulo,
+      escritor,
+      dataPublicacao,
+      formato,
+      qtdPaginas,
+      generos,
+      idioma
+    }: LivroData): Livro => {
+
+    const novoLivro = livroFactory.criar(
+      {
+        titulo,
+        escritor,
+        dataPublicacao: formataISOParaBR(dataPublicacao) || "",
+        formato,
+        qtdPaginas,
+        generos,
+        idioma
+      }
+    );
 
     LivroStorage.add(novoLivro);
 
     return novoLivro;
   },
 
-  getAllTexts: (): Livro[] => {
-    return LivroStorage.getAll();
-  },
-
-  buscarLivro: (id: string): Livro | undefined => {
-    return LivroStorage.getById(id);
-  },
-
-  atualizandoLivro: (id: string, data: LivroData): Livro | null => {
+  atualizarLivroPorId: (id: string, data: LivroData): Livro | null => {
     const livro = LivroStorage.getById(id);
 
     if (!livro) {
@@ -37,7 +54,7 @@ export default {
     const livroAtualizado: Livro = {
       ...livro,
       ...data,
-      published: new Date(data.published)
+      dataPublicacao: formataISOParaBR(data.dataPublicacao) || ""
     };
 
     LivroStorage.updateById(id, livroAtualizado);
@@ -45,9 +62,8 @@ export default {
     return livroAtualizado;
   },
 
-
-  deleteLivroById: (id: string): Livro[] => {
+  excluirLivroPorId: (id: string): Livro[] => {
     return LivroStorage.deleteBookById(id);
   }
 
-}
+};
