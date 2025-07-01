@@ -5,5 +5,5 @@ export function formataISOParaBR(iso: string): string | null {
 
   if (!isValid(data)) return null;
 
-  return format(data, "dd-MM-yyyy");
+  return format(data, "dd/MM/yyyy");
 }

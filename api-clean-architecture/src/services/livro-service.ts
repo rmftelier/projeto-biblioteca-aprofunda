@@ -5,6 +5,7 @@ import { formataISOParaBR } from "../utils/formata-data";
 
 interface Livro extends LivroData {
   id: string;
+  criadoEm: string;
 }
 
 export default {

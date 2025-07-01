@@ -19,7 +19,8 @@ export default {
       formato,
       qtdPaginas,
       generos,
-      idioma
-    })
-  }
-}
+      idioma,
+      criadoEm: new Date().toLocaleDateString('pt-BR')
+    });
+  },
+};

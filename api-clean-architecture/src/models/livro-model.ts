@@ -7,6 +7,7 @@ export interface LivroProps {
   qtdPaginas: number;
   generos: string[];
   idioma: string;
+  criadoEm: string;
 }
 
 export interface LivroData {
@@ -28,6 +29,7 @@ export class Livro {
   qtdPaginas: number;
   generos: string[];
   idioma: string;
+  criadoEm: string;
 
   constructor({
     id,
@@ -37,7 +39,8 @@ export class Livro {
     formato,
     qtdPaginas,
     generos,
-    idioma
+    idioma,
+    criadoEm
   }: LivroProps) {
     this.id = id;
     this.titulo = titulo;
@@ -47,5 +50,6 @@ export class Livro {
     this.qtdPaginas = qtdPaginas;
     this.generos = generos;
     this.idioma = idioma;
+    this.criadoEm = criadoEm;
   }
 }
