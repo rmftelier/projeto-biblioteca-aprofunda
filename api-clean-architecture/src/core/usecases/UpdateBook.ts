@@ -18,7 +18,7 @@ export class UpdateBook {
     const book = await this.bookRepository.getById(id);
 
     if (!book) {
-      throw new Error('livro não encontrado');
+      throw new Error('Livro não encontrado');
     }
 
     if (data.title) book.title = data.title;

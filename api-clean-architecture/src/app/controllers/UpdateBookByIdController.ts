@@ -10,6 +10,7 @@ export class UpdateBookByIdController {
       const updateBook = await bookRepository.updateById({ id, title, author, publishedAt, format, pages, genres, language, createdAt });
 
       res.json(updateBook);
+
       return res.status(201).json({
         message: 'Livro atualizado com sucesso',
         book: updateBook
