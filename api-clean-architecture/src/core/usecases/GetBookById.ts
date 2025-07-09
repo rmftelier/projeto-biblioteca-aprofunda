@@ -5,6 +5,13 @@ export class GetBookById {
   constructor(private bookRepository: BookRepository) { }
 
   async execute(id: string): Promise<Book | null> {
-    return this.bookRepository.getById(id);
+
+    const book = await this.bookRepository.findById(id);
+
+    if (!book) {
+      throw new Error('Livro não encontrado');
+    }
+
+    return book;
   }
 }

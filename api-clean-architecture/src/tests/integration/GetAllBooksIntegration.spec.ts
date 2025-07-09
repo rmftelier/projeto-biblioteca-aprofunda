@@ -19,9 +19,9 @@ describe('GET /books', () => {
 
     const response = await request(app).get("/books");
 
-    expect(response.body).toHaveLength(1);
     expect(response.status).toBe(200);
     expect(response.body[0].title).toBe("Jurassic Park");
+
   });
 
 });

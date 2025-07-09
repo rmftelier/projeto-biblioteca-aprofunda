@@ -25,7 +25,7 @@ describe("DELETE /books/:id", () => {
     expect(response.status).toBe(204);
   });
 
-  it("deve retornar 404 quando tentar remover um usuário inexistente", async () => {
+  it("deve retornar 404 quando tentar remover um livro inexistente", async () => {
     const response = await request(app).delete("/books/123456");
 
     expect(response.status).toBe(404);

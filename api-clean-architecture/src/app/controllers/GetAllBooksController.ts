@@ -1,14 +1,15 @@
-//Puxa o bookRepository quando não é necessário fazer nenhuma mudança,
-//caso seja precisamos chamar um dos useCase
 import { Request, Response } from 'express';
 import { bookRepository } from "../../infra/database/repositoryInstance";
+import { GetAllBooks } from '../../core/usecases/GetAllBooks';
 
 export class GetAllBooksController {
 
   async handle(req: Request, res: Response): Promise<Response> {
 
     try {
-      const books = await bookRepository.getAll();
+      const allBooks = new GetAllBooks(bookRepository);
+
+      const books = await allBooks.execute();
 
       return res.status(200).json(books);
 

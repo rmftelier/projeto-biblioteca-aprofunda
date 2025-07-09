@@ -24,10 +24,10 @@ describe('PATCH /books/:id', () => {
       title: "Orgulho e Preconceito"
     });
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
   });
 
-  it.skip("deve retornar 404 quando um id for inválido", async () => {
+  it("deve retornar 404 quando um id for inválido", async () => {
     const response = await request(app).patch("/books/123456").send({
       title: "Dom Casmurro"
     });

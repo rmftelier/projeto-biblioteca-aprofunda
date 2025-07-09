@@ -8,7 +8,7 @@ export class InMemoryBookRepository implements BookRepository {
     return this.books;
   }
 
-  async getById(id: string): Promise<Book | null> {
+  async findById(id: string): Promise<Book | null> {
     const book = this.books.find((book) => book.id === id);
 
     return book || null;
@@ -18,7 +18,7 @@ export class InMemoryBookRepository implements BookRepository {
     this.books.push(book);
   }
 
-  async updateById(book: Book): Promise<void> {
+  async update(book: Book): Promise<void> {
     const index = this.books.findIndex((livro) => livro.id === livro.id)
 
     if (index !== -1) {
@@ -26,7 +26,7 @@ export class InMemoryBookRepository implements BookRepository {
     }
   }
 
-  async deleteById(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     this.books = this.books.filter((book) => book.id !== id);
   }
 

@@ -33,7 +33,7 @@ describe("GET /books/:id", () => {
     const response = await request(app).get("/books/123456");
 
     expect(response.status).toBe(404);
-    expect(response.body.error).toBe("Livro não encontrado");
+    expect(response.body.error).toBe('Livro não encontrado');
 
   });
 });

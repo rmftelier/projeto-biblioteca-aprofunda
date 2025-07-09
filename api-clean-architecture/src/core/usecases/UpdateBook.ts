@@ -15,7 +15,7 @@ export class UpdateBook {
   constructor(private bookRepository: BookRepository) { }
 
   async execute(id: string, data: IUpdateBookInput) {
-    const book = await this.bookRepository.getById(id);
+    const book = await this.bookRepository.findById(id);
 
     if (!book) {
       throw new Error('Livro não encontrado');

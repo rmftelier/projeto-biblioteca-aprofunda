@@ -25,7 +25,7 @@ describe('DeleteBook (UseCase)', () => {
     const deleteBook = new DeleteBook(bookRepository);
     await deleteBook.execute(book.id);
 
-    const deletedBook = await bookRepository.getById(book.id);
+    const deletedBook = await bookRepository.findById(book.id);
     expect(deletedBook).toBeNull();
   });
 });

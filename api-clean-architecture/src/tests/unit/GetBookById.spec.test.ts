@@ -21,7 +21,7 @@ describe('GetBookById (UseCase)', () => {
     bookRepository.books.push(book);
   });
 
-  it('deve retornar todos os livros criados', async () => {
+  it('deve retornar o livro com o id correspondente corretamente', async () => {
 
     const getBookById = new GetBookById(bookRepository);
 
