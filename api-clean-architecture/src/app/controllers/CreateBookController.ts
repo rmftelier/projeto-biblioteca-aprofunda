@@ -11,13 +11,12 @@ export class CreateBookController {
       format,
       pages,
       genres,
-      language,
-      createdAt } = req.body;
+      language } = req.body;
 
     try {
       const createBook = new CreateBook(bookRepository);
 
-      const book = await createBook.execute({ title, author, publishedAt, format, pages, genres, language, createdAt });
+      const book = await createBook.execute({ title, author, publishedAt, format, pages, genres, language });
 
       return res.status(201).json(book);
 

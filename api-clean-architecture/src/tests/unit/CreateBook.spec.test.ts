@@ -17,12 +17,12 @@ describe('CreateBook (UseCase)', () => {
       format: 'Físico',
       pages: 528,
       genres: ['Ficção Científica', 'Ação', 'Aventura'],
-      language: 'Português',
-      createdAt: '2025-07-07'
+      language: 'Português'
     });
 
     expect(book).toBeInstanceOf(Book);
     expect(book.title).toBe('Jurassic Park');
+    expect(book.publishedAt).toBe('12/06/2015')
     expect(book.genres.every(item => typeof item === 'string')).toBe(true);
     expect(bookRepository.books).toHaveLength(1);
   })

@@ -5,11 +5,11 @@ import { UpdateBook } from "../../core/usecases/UpdateBook";
 export class UpdateBookByIdController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const { title, author, publishedAt, format, pages, genres, language, createdAt } = req.body;
+    const { title, author, publishedAt, format, pages, genres, language } = req.body;
 
     try {
       const updateBook = new UpdateBook(bookRepository);
-      const book = await updateBook.execute(id, { title, author, publishedAt, format, pages, genres, language, createdAt });
+      const book = await updateBook.execute(id, { title, author, publishedAt, format, pages, genres, language });
 
       return res.status(201).json({
         message: 'Livro atualizado com sucesso',

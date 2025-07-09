@@ -8,7 +8,6 @@ export interface IUpdateBookInput {
   pages?: number;
   genres?: string[];
   language?: string;
-  createdAt?: string;
 };
 
 export class UpdateBook {
@@ -23,12 +22,14 @@ export class UpdateBook {
 
     if (data.title) book.title = data.title;
     if (data.author) book.author = data.author;
-    if (data.publishedAt) book.publishedAt = data.publishedAt;
+    if (data.publishedAt) {
+      const formattedDate = new Date(data.publishedAt + 'T00:00:00').toLocaleDateString('pt-BR');
+      book.publishedAt = formattedDate;
+    };
     if (data.format) book.format = data.format;
     if (data.pages) book.pages = data.pages;
     if (data.genres) book.genres = data.genres;
     if (data.language) book.language = data.language;
-    if (data.createdAt) book.createdAt = data.createdAt;
 
     return book;
   }

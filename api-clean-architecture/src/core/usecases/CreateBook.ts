@@ -10,7 +10,6 @@ export interface ICreateBookInput {
   pages: number;
   genres: string[];
   language: string;
-  createdAt: string;
 };
 
 export class CreateBook {
@@ -18,16 +17,18 @@ export class CreateBook {
 
   async execute(data: ICreateBookInput): Promise<Book> {
 
+    const formattedDate = new Date(data.publishedAt + 'T00:00:00').toLocaleDateString('pt-BR');
+
     const book = new Book(
       randomUUID(),
       data.title,
       data.author,
-      data.publishedAt,
+      formattedDate,
       data.format,
       data.pages,
       data.genres,
       data.language,
-      data.createdAt
+      new Date().toLocaleDateString('pt-br')
     );
 
     await this.bookRepository.save(book);
