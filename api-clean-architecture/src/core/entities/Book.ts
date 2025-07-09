@@ -5,7 +5,7 @@ export class Book {
     id: string,
     public title: string,
     public author: string,
-    public published: string,
+    public publishedAt: string,
     public format: string,
     public pages: number,
     public genres: string[],

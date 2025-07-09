@@ -1,10 +1,9 @@
 import { Book } from "../../core/entities/Book";
-import { UpdateBook } from "../../core/usecases/UpdateBook";
+import { GetAllBooks } from "../../core/usecases/GetAllBooks";
 import { bookRepository } from "../../infra/database/repositoryInstance";
 
-describe('UpdateBook (UseCase)', () => {
-  let book: Book
-
+describe('GetAllBooks (UseCase)', () => {
+  let book: Book;
   beforeEach(() => {
     bookRepository.books = [];
     book = new Book(
@@ -21,12 +20,13 @@ describe('UpdateBook (UseCase)', () => {
     bookRepository.books.push(book);
   });
 
-  it('deve atualizar um livro existente com sucesso', async () => {
-    const updateBook = new UpdateBook(bookRepository);
+  it('deve retornar todos os livros criados', async () => {
 
-    const update = await updateBook.execute(book.id, { genres: ['Ficção Científica'] });
+    const getAllBooks = new GetAllBooks(bookRepository);
 
-    expect(update.genres).toEqual(['Ficção Científica']);
-  })
+    const books = await getAllBooks.execute();
 
+    expect(books).toHaveLength(1);
+    expect(books[0].title).toBe('Jurassic Park');
+  });
 });

@@ -1,0 +1,33 @@
+import { Book } from "../../core/entities/Book";
+import { GetBookById } from "../../core/usecases/GetBookById";
+import { bookRepository } from "../../infra/database/repositoryInstance";
+
+describe('GetBookById (UseCase)', () => {
+  let book: Book;
+
+  beforeEach(() => {
+    bookRepository.books = [];
+    book = new Book(
+      '1',
+      'Jurassic Park',
+      'Michael Crichton',
+      '2015-06-12',
+      'Físico',
+      528,
+      ['Ficção Científica', 'Ação', 'Aventura'],
+      'Português',
+      '2025-07-07'
+    )
+    bookRepository.books.push(book);
+  });
+
+  it('deve retornar todos os livros criados', async () => {
+
+    const getBookById = new GetBookById(bookRepository);
+
+    const book = await getBookById.execute('1');
+
+    expect(book?.id).toBe('1');
+    expect(book?.title).toBe('Jurassic Park');
+  });
+});
