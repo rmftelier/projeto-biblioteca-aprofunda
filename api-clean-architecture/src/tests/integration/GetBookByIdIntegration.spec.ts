@@ -12,8 +12,7 @@ describe("GET /books/:id", () => {
       format: "Físico",
       pages: 528,
       genres: ["Ficção Científica", "Ação", "Aventura"],
-      language: "Português",
-      createdAt: "2025-07-07"
+      language: "Português"
     });
     bookId = body.id;
   });
@@ -25,7 +24,7 @@ describe("GET /books/:id", () => {
     expect(response.status).toBe(200);
     expect(response.body.title).toBe("Jurassic Park");
     expect(response.body).toHaveProperty("id", bookId);
-    expect(response.body).toHaveProperty("author", "Michael Crichton")
+    expect(response.body).toHaveProperty("author", "Michael Crichton");
 
   });
 

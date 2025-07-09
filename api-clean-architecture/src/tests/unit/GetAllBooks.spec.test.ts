@@ -15,7 +15,7 @@ describe('GetAllBooks (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
-      '2025-07-07'
+      new Date().toLocaleDateString('pt-br')
     )
     bookRepository.books.push(book);
   });
@@ -26,7 +26,7 @@ describe('GetAllBooks (UseCase)', () => {
 
     const books = await getAllBooks.execute();
 
-    //expect(books).toHaveLength(1);
+    expect(books).toHaveLength(1);
     expect(books[0].title).toBe('Jurassic Park');
   });
 });

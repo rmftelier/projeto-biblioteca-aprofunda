@@ -1,5 +1,4 @@
 import request from "supertest";
-
 import app from "../../infra/server/server";
 
 describe("DELETE /books/:id", () => {
@@ -13,8 +12,7 @@ describe("DELETE /books/:id", () => {
       format: "Físico",
       pages: 528,
       genres: ["Ficção Científica", "Ação", "Aventura"],
-      language: "Português",
-      createdAt: "2025-07-07"
+      language: "Português"
     });
     bookId = body.id;
   });

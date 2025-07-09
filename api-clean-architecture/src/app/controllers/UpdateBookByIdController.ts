@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { bookRepository } from "../../infra/database/repositoryInstance";
 import { UpdateBook } from "../../core/usecases/UpdateBook";
+import { bookRepository } from "../../infra/database/repositoryInstance";
 
 export class UpdateBookByIdController {
   async handle(req: Request, res: Response): Promise<Response> {
@@ -11,7 +11,7 @@ export class UpdateBookByIdController {
       const updateBook = new UpdateBook(bookRepository);
       const book = await updateBook.execute(id, { title, author, publishedAt, format, pages, genres, language });
 
-      return res.status(201).json({
+      return res.status(200).json({
         message: 'Livro atualizado com sucesso',
         book: book
       });

@@ -7,7 +7,7 @@ describe('DeleteBook (UseCase)', () => {
     bookRepository.books = [];
   });
 
-  it('deve deletar um livro existente com sucesso', async () => {
+  it('deve excluir um livro existente com sucesso', async () => {
     const book = new Book(
       '1',
       'Jurassic Park',
@@ -17,7 +17,7 @@ describe('DeleteBook (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
-      '2025-07-07'
+      new Date().toLocaleDateString('pt-br')
     );
 
     await bookRepository.save(book);

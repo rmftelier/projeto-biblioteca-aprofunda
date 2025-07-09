@@ -13,15 +13,12 @@ describe('GET /books', () => {
       format: "Físico",
       pages: 528,
       genres: ["Ficção Científica", "Ação", "Aventura"],
-      language: "Português",
-      createdAt: "2025-07-07"
+      language: "Português"
     });
 
     const response = await request(app).get("/books");
 
     expect(response.status).toBe(200);
     expect(response.body[0].title).toBe("Jurassic Park");
-
   });
-
 });

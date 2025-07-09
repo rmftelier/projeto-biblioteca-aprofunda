@@ -16,7 +16,7 @@ describe('UpdateBook (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
-      '2025-07-07'
+      new Date().toLocaleDateString('pt-br')
     )
     bookRepository.books.push(book);
   });

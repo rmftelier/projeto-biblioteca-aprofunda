@@ -1,5 +1,3 @@
-import { create } from "domain";
-
 export class Book {
   public readonly id: string;
   public readonly createdAt: string;

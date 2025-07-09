@@ -1,5 +1,4 @@
 import request from "supertest";
-
 import app from "../../infra/server/server";
 
 describe("POST /books", () => {
@@ -15,6 +14,6 @@ describe("POST /books", () => {
       language: "Português"
     });
 
-    expect(response.status).toBe(201)
+    expect(response.status).toBe(201);
   })
 })
