@@ -26,14 +26,14 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 | Campo            | Tipo      | Descrição                                         |
 |------------------|-----------|--------------------------------------------------|
 | `id`             | string    | ID único gerado automaticamente                   |
-| `titulo`         | string    | Título do livro                                   |
-| `escritor`       | string    | Escritor do livro                                 |
-| `dataPublicacao` | string    | Data de publicação do livro (formato: `aaaa-mm-dd`) |
-| `formato`        | string    | Formato do livro (ex: Físico, Kindle, Audiobook) |
-| `qtdPaginas`     | number    | Quantidade de páginas                             |
-| `generos`        | string[ ] | Gêneros do livro                                 |
-| `idioma`         | string    | Idioma da versão do livro                         |
-| `criadoEm`       | string    | Data da criação do objeto livro                   |
+| `title`         | string    | Título do livro                                   |
+| `author`       | string    | Escritor do livro                                 |
+| `publishedAt` | string    | Data de publicação do livro (formato: `aaaa-mm-dd`) |
+| `format`        | string    | Formato do livro (ex: Físico, Kindle, Audiobook) |
+| `pages`     | number    | Quantidade de páginas                             |
+| `genres`        | string[ ] | Gêneros do livro                                 |
+| `language`         | string    | Idioma da versão do livro                         |
+| `createdAt`       | string    | Data da criação do objeto livro                   |
 
 
 ## Tecnologias utilizadas
@@ -44,7 +44,7 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 - uuid (para geração de IDs)
 - date-fns (para manipulação de datas)
 - CORS (para permitir requisições cross-origin)
-
+- Jest e SuperTest (para testes unitários e de integração)
 ---
 
 ## Instalação 
@@ -52,13 +52,13 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 1. Clone o repositório: 
 
    ```bash
-    git clone https://github.com/rmftelier/projeto2-clean-architecture-aprofunda.git
+    git clone https://github.com/rmftelier/projeto3-testes-aprofunda.git
    ```
 
 2. Acesse a pasta do projeto:
 
    ```bash
-    cd projeto2-clean-architecture-aprofunda/api-clean-architecture
+    cd projeto3-testes-aprofunda/api-clean-architecture
    ```
 
 3. Instale as dependências:
@@ -75,17 +75,23 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 
 5. Para testar as rotas utilize ferramentas como: ThunderClient ou Postman e faça as requisições que desejar para testar os endpoints da API.
 
+6. Para rodar os testes utilize o comando:
+
+    ```bash
+     npm run test
+    ```
+
 ---
 
 ## Endpoints
 
 | Método | Rota          | Descrição               |
 | ------ | ------------- | ----------------------- |
-| GET    | `/livros` | Listar todos os livros  |
-| GET    | `/livros/:id`  | Buscar livro por ID     |
-| POST   | `/livros`  | Cadastrar um novo livro |
-| PUT    | `/livros/:id`  | Atualizar livro por ID  |
-| DELETE | `/livros/:id`  | Excluir livro por ID    |
+| GET    | `/books` | Listar todos os livros  |
+| GET    | `/books/:id`  | Buscar livro por ID     |
+| POST   | `/books`  | Cadastrar um novo livro |
+| PATCH    | `/books/:id`  | Atualizar livro por ID  |
+| DELETE | `/books/:id`  | Excluir livro por ID    |
 
 ---
 
@@ -98,7 +104,7 @@ Abaixo alguns exemplos de requisição e resposta utilizando o Postman.
 **Requisição:**
 
 ```
-  GET http://localhost:3000/livros
+  GET http://localhost:3000/books
 ```
 
 **Resposta:**
@@ -112,43 +118,40 @@ Abaixo alguns exemplos de requisição e resposta utilizando o Postman.
 **Requisição:**
 
 ```
-  POST http://localhost:3000/livros
+  POST http://localhost:3000/books
 ```
 
 Corpo (Body):
 
 ```json
-  {
-    "titulo": "Jurassic Park",
-    "escritor": "Michael Crichton",
-    "dataPublicacao": "2015-06-12",
-    "formato": "Físico",
-    "qtdPaginas": 528,
-    "generos": ["Ficção Científica", "Ação", "Aventura"],
-    "idioma": "Português"
-  }
+{
+    "title": "Jurassic Park",
+    "author": "Michael Crichton",
+    "publishedAt": "2015-06-12",
+    "format": "Físico",
+    "pages": 528,
+    "genres": ["Ficção Científica", "Ação", "Aventura"],
+    "language": "Português"
+}
 ```
 
 **Resposta:**
 
 ```json
 {
-    "message": "O livro: Jurassic Park foi cadastrado com sucesso!",
-    "novoLivro": {
-        "id": "5b5c5012-122e-43c9-96b9-297ab35aca01",
-        "titulo": "Jurassic Park",
-        "escritor": "Michael Crichton",
-        "dataPublicacao": "12/06/2015",
-        "formato": "Físico",
-        "qtdPaginas": 528,
-        "generos": [
-            "Ficção Científica",
-            "Ação",
-            "Aventura"
-        ],
-        "idioma": "Português",
-        "criadoEm": "01/07/2025"
-    }
+    "title": "Jurassic Park",
+    "author": "Michael Crichton",
+    "publishedAt": "12/06/2015",
+    "format": "Físico",
+    "pages": 528,
+    "genres": [
+        "Ficção Científica",
+        "Ação",
+        "Aventura"
+    ],
+    "language": "Português",
+    "id": "09eef7aa-74ff-46d9-9123-737bc2404519",
+    "createdAt": "09/07/2025"
 }
 ```
 
@@ -157,26 +160,26 @@ Corpo (Body):
 **Requisição:**
 
 ```
-  GET http://localhost:3000/livros/5b5c5012-122e-43c9-96b9-297ab35aca01
+  GET http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
 ```
 
 **Resposta:**
 
 ```json
 {
-    "id": "5b5c5012-122e-43c9-96b9-297ab35aca01",
-    "titulo": "Jurassic Park",
-    "escritor": "Michael Crichton",
-    "dataPublicacao": "12/06/2015",
-    "formato": "Físico",
-    "qtdPaginas": 528,
-    "generos": [
+    "title": "Jurassic Park",
+    "author": "Michael Crichton",
+    "publishedAt": "12/06/2015",
+    "format": "Físico",
+    "pages": 528,
+    "genres": [
         "Ficção Científica",
         "Ação",
         "Aventura"
     ],
-    "idioma": "Português",
-    "criadoEm": "01/07/2025"
+    "language": "Português",
+    "id": "a40c5977-7f87-463b-9641-3aca53d9b99b",
+    "createdAt": "09/07/2025"
 }
 ```
 
@@ -186,20 +189,15 @@ Corpo (Body):
 **Requisição:**
 
 ```
-  PUT http://localhost:3000/livros/5b5c5012-122e-43c9-96b9-297ab35aca01
+  PATCH http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
 ```
 
 Corpo (Body):
 
 ```json
 {
-  "titulo": "Jurassic Park",
-  "escritor": "Michael Crichton",
-  "dataPublicacao": "2019-04-17",
-  "formato": "Edição Kindle",
-  "qtdPaginas": 748,
-  "generos": ["Ficção Científica", "Ação", "Aventura", "Clássico"],
-  "idioma": "Português"
+    "title": "Orgulho e Preconceito",
+    "pages": 582
 }
 ```
 
@@ -207,7 +205,22 @@ Corpo (Body):
 
 ```json
 {
-  "message": "Livro com id: 5b5c5012-122e-43c9-96b9-297ab35aca01 foi editado com sucesso."
+    "message": "Livro atualizado com sucesso",
+    "book": {
+        "title": "Orgulho e Preconceito",
+        "author": "Michael Crichton",
+        "publishedAt": "12/06/2015",
+        "format": "Físico",
+        "pages": 582,
+        "genres": [
+            "Ficção Científica",
+            "Ação",
+            "Aventura"
+        ],
+        "language": "Português",
+        "id": "09eef7aa-74ff-46d9-9123-737bc2404519",
+        "createdAt": "09/07/2025"
+    }
 }
 ```
 
@@ -215,16 +228,13 @@ Corpo (Body):
 
 **Requisição:**
 ```
-  DELETE http://localhost:3000/livros/5b5c5012-122e-43c9-96b9-297ab35aca01
+  DELETE http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
 ```
 
 **Resposta:**
 
 ```json
-{
-    "message": "Livro com o id: 5b5c5012-122e-43c9-96b9-297ab35aca01 foi excluído com sucesso.",
-    "listaLivrosAtualizada": []
-}
+204 NO CONTENT
 ```
 
 ---
