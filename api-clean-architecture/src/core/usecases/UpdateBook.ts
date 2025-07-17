@@ -1,4 +1,5 @@
 import { BookRepository } from "../repositories/BookRepository";
+import { Book } from "../entities/Book";
 
 export interface IUpdateBookInput {
   title?: string;
@@ -31,6 +32,8 @@ export class UpdateBook {
     if (data.genres) book.genres = data.genres;
     if (data.language) book.language = data.language;
 
-    return book;
+    const updatedBook = await this.bookRepository.update(book);
+
+    return updatedBook;
   }
 }

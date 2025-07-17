@@ -16,7 +16,10 @@ export class UpdateBookByIdController {
         book: book
       });
     } catch (error: any) {
-      return res.status(404).json({ error: error.message });
+      if (error.message === 'Livro não encontrado') {
+        return res.status(404).json({ error: error.message });
+      }
+      return res.status(500).json({ error: error.message });
     }
   }
 }

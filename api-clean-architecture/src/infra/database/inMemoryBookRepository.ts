@@ -18,12 +18,14 @@ export class InMemoryBookRepository implements BookRepository {
     this.books.push(book);
   }
 
-  async update(book: Book): Promise<void> {
+  async update(book: Book): Promise<Book> {
     const index = this.books.findIndex((livro) => livro.id === livro.id)
 
     if (index !== -1) {
       this.books[index] = book
     }
+
+    return book;
   }
 
   async delete(id: string): Promise<void> {

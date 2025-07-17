@@ -18,7 +18,7 @@ export class GetBookByIdController {
       return res.status(200).json(book);
 
     } catch (error: any) {
-      return res.status(404).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 }

@@ -6,6 +6,8 @@ export class DeleteBookByIdController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
+
+
     try {
       const deleteBook = new DeleteBook(bookRepository);
 
@@ -14,7 +16,12 @@ export class DeleteBookByIdController {
       return res.status(204).send();
 
     } catch (error: any) {
-      return res.status(404).json({ error: error.message });
+
+      if (error.message === 'Livro não encontrado') {
+        return res.status(404).json({ error: error.message });
+      }
+
+      return res.status(500).json({ error: error.message });
     }
   }
 }

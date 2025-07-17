@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../../infra/server/server";
+import { bookRepository } from "../../infra/database/repositoryInstance";
 
 describe("GET /books/:id", () => {
   let bookId: string;
@@ -33,6 +34,19 @@ describe("GET /books/:id", () => {
 
     expect(response.status).toBe(404);
     expect(response.body.error).toBe('Livro não encontrado');
+
+  });
+
+  it('deve retornar o status 500 se ocorrer um erro inesperado', async () => {
+
+    jest
+      .spyOn(bookRepository, 'findById')
+      .mockRejectedValue(new Error('Falha de banco'));
+
+    const response = await request(app).get("/books/qualquer-id");
+
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBe('Falha de banco');
 
   });
 });
