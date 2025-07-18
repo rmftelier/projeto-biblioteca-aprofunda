@@ -6,8 +6,6 @@ export class DeleteBookByIdController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-
-
     try {
       const deleteBook = new DeleteBook(bookRepository);
 

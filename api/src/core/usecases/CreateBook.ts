@@ -1,4 +1,3 @@
-import { randomUUID } from "crypto";
 import { Book } from "../entities/Book";
 import { BookRepository } from "../repositories/BookRepository";
 
@@ -17,19 +16,16 @@ export class CreateBook {
 
   async execute(data: ICreateBookInput): Promise<Book> {
 
-    const formattedDate = new Date(data.publishedAt + 'T00:00:00').toLocaleDateString('pt-BR');
+    const formattedDate = new Date(data.publishedAt + 'T00:00:00');
 
     const book = new Book(
-      randomUUID(),
       data.title,
       data.author,
       formattedDate,
       data.format,
       data.pages,
       data.genres,
-      data.language,
-      new Date().toLocaleDateString('pt-br')
-    );
+      data.language);
 
     await this.bookRepository.save(book);
 

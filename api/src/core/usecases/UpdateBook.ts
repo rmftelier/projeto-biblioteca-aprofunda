@@ -24,7 +24,7 @@ export class UpdateBook {
     if (data.title) book.title = data.title;
     if (data.author) book.author = data.author;
     if (data.publishedAt) {
-      const formattedDate = new Date(data.publishedAt + 'T00:00:00').toLocaleDateString('pt-BR');
+      const formattedDate = new Date(data.publishedAt + 'T00:00:00');
       book.publishedAt = formattedDate;
     };
     if (data.format) book.format = data.format;

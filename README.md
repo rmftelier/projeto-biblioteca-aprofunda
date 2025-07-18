@@ -41,9 +41,8 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 - Node.js 
 - Express 
 - TypeScript
-- uuid (para geração de IDs)
-- date-fns (para manipulação de datas)
 - CORS (para permitir requisições cross-origin)
+- MongoDB Atlas 
 - Jest e SuperTest (para testes unitários e de integração)
 ---
 
@@ -52,25 +51,32 @@ API para gerenciamento de uma biblioteca, seguindo os princípios da Clean Archi
 1. Clone o repositório: 
 
    ```bash
-    git clone https://github.com/rmftelier/projeto3-testes-aprofunda.git
+    git clone https://github.com/rmftelier/projeto4-integracao-mongodb-aprofunda.git
    ```
 
 2. Acesse a pasta do projeto:
 
    ```bash
-    cd projeto3-testes-aprofunda/api-clean-architecture
+    cd projeto4-integracao-mongodb-aprofunda
    ```
 
-3. Instale as dependências:
+3. Crie um arquivo chamado `.env` e adicione a URI que será parecida com isso:
+
+   ```bash
+     MONGO_URI=mongodb+srv://<usuario>:<senha>@cluster0.mongodb.net/?retryWrites=true&w=majority
+   ```
+   OBS: essa URI é criada após a construção de um banco de dados no [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
+4. Entre na pasta `api` e instale as dependências:
 
     ```bash
      npm install
     ```
 
-4. Inicie o servidor:
+5. Inicie o servidor:
 
     ```bash
-     npm run start
+     npm run dev
     ```
 
 5. Para testar as rotas utilize ferramentas como: ThunderClient ou Postman e faça as requisições que desejar para testar os endpoints da API.
@@ -130,7 +136,7 @@ Corpo (Body):
     "publishedAt": "2015-06-12",
     "format": "Físico",
     "pages": 528,
-    "genres": ["Ficção Científica", "Ação", "Aventura"],
+    "genres": ["Ficção Científica", "Fantasia", "Thriller"],
     "language": "Português"
 }
 ```
@@ -141,17 +147,16 @@ Corpo (Body):
 {
     "title": "Jurassic Park",
     "author": "Michael Crichton",
-    "publishedAt": "12/06/2015",
+    "publishedAt": "2015-12-06T02:00:00.000Z",
     "format": "Físico",
     "pages": 528,
     "genres": [
         "Ficção Científica",
-        "Ação",
-        "Aventura"
+        "Fantasia",
+        "Thriller"
     ],
     "language": "Português",
-    "id": "09eef7aa-74ff-46d9-9123-737bc2404519",
-    "createdAt": "09/07/2025"
+    "id": "68799bb690ab1b53135f4f47"
 }
 ```
 
@@ -160,7 +165,7 @@ Corpo (Body):
 **Requisição:**
 
 ```
-  GET http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
+  GET http://localhost:3000/books/68799bb690ab1b53135f4f47
 ```
 
 **Resposta:**
@@ -169,17 +174,16 @@ Corpo (Body):
 {
     "title": "Jurassic Park",
     "author": "Michael Crichton",
-    "publishedAt": "12/06/2015",
+    "publishedAt": "2015-12-06T02:00:00.000Z",
     "format": "Físico",
     "pages": 528,
     "genres": [
         "Ficção Científica",
-        "Ação",
-        "Aventura"
+        "Fantasia",
+        "Thriller"
     ],
     "language": "Português",
-    "id": "a40c5977-7f87-463b-9641-3aca53d9b99b",
-    "createdAt": "09/07/2025"
+    "id": "68799bb690ab1b53135f4f47"
 }
 ```
 
@@ -189,7 +193,7 @@ Corpo (Body):
 **Requisição:**
 
 ```
-  PATCH http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
+  PATCH http://localhost:3000/books/68799bb690ab1b53135f4f47
 ```
 
 Corpo (Body):
@@ -197,6 +201,7 @@ Corpo (Body):
 ```json
 {
     "title": "Orgulho e Preconceito",
+    "author": "Jane Austen", 
     "pages": 582
 }
 ```
@@ -208,18 +213,17 @@ Corpo (Body):
     "message": "Livro atualizado com sucesso",
     "book": {
         "title": "Orgulho e Preconceito",
-        "author": "Michael Crichton",
-        "publishedAt": "12/06/2015",
+        "author": "Jane Austen",
+        "publishedAt": "2015-12-06T02:00:00.000Z",
         "format": "Físico",
         "pages": 582,
         "genres": [
             "Ficção Científica",
-            "Ação",
-            "Aventura"
+            "Fantasia",
+            "Thriller"
         ],
         "language": "Português",
-        "id": "09eef7aa-74ff-46d9-9123-737bc2404519",
-        "createdAt": "09/07/2025"
+        "id": "68799bb690ab1b53135f4f47"
     }
 }
 ```
@@ -228,7 +232,7 @@ Corpo (Body):
 
 **Requisição:**
 ```
-  DELETE http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
+  DELETE http://localhost:3000/books/68799bb690ab1b53135f4f47
 ```
 
 **Resposta:**
