@@ -1,4 +1,4 @@
-import app from "./infra/server/server";
+import app from "@infra/server/server";
 
 const PORT = 3000;
 

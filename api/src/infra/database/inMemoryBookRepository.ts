@@ -1,5 +1,5 @@
-import { Book } from '../../core/entities/Book';
-import { BookRepository } from "../../core/repositories/BookRepository";
+import { Book } from '@core/entities/Book';
+import { BookRepository } from "@core/repositories/BookRepository";
 
 export class InMemoryBookRepository implements BookRepository {
   public books: Book[] = [];

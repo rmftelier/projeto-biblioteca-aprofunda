@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
-import { Book } from "../entities/Book";
-import { BookRepository } from "../repositories/BookRepository";
+import { Book } from "@core/entities/Book";
+import { BookRepository } from "@core/repositories/BookRepository";
 
 export interface ICreateBookInput {
   title: string;

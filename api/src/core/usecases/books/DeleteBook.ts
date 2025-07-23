@@ -1,4 +1,4 @@
-import { BookRepository } from "../repositories/BookRepository";
+import { BookRepository } from "@core/repositories/BookRepository";
 
 export class DeleteBook {
   constructor(private bookRepository: BookRepository) { }

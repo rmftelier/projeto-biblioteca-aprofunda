@@ -1,5 +1,5 @@
-import { BookRepository } from "../repositories/BookRepository";
-import { Book } from "../entities/Book";
+import { BookRepository } from "@core/repositories/BookRepository";
+import { Book } from "@core/entities/Book";
 
 export interface IUpdateBookInput {
   title?: string;
