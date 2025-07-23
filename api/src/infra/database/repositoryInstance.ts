@@ -1,3 +1,3 @@
-import { InMemoryBookRepository } from './inMemoryBookRepository';
+import { MongoBookRepository } from './repositories/MongoBookRepository';
 
-export const bookRepository = new InMemoryBookRepository();
+export const bookRepository = new MongoBookRepository();
