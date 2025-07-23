@@ -1,9 +1,8 @@
 export class Book {
-
   constructor(
     public title: string,
     public author: string,
-    public publishedAt: string,
+    public publishedAt: Date,
     public format: string,
     public pages: number,
     public genres: string[],

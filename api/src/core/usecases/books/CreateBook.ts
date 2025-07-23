@@ -16,7 +16,7 @@ export class CreateBook {
 
   async execute(data: ICreateBookInput): Promise<Book> {
 
-    const formattedDate = new Date(data.publishedAt + 'T00:00:00').toLocaleDateString('pt-BR');
+    const formattedDate = new Date(data.publishedAt + 'T00:00:00');
 
     const book = new Book(
       data.title,
