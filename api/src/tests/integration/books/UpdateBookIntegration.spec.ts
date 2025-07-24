@@ -1,6 +1,6 @@
 import request from "supertest";
 
-import app from "../../infra/server/server";
+import app from "@infra/server/server";
 
 describe('PATCH /books/:id', () => {
   let bookId: string;

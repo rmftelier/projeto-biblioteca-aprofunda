@@ -1,6 +1,6 @@
 import request from "supertest";
-import app from "../../infra/server/server";
-import { bookRepository } from '../../infra/database/repositoryInstance';
+import app from "@infra/server/server";
+import { bookRepository } from '@infra/database/repositoryInstance';
 
 describe("POST /books", () => {
 
