@@ -1,10 +1,9 @@
 import { BookRepository } from "@core/repositories/BookRepository";
-import { Book } from "@core/entities/Book";
 
 export interface IUpdateBookInput {
   title?: string;
   author?: string;
-  publishedAt?: string;
+  publishedYear?: number;
   format?: string;
   pages?: number;
   genres?: string[];
@@ -23,10 +22,7 @@ export class UpdateBook {
 
     if (data.title) book.title = data.title;
     if (data.author) book.author = data.author;
-    if (data.publishedAt) {
-      const formattedDate = new Date(data.publishedAt + 'T00:00:00');
-      book.publishedAt = formattedDate;
-    };
+    if (data.publishedYear) book.publishedYear = data.publishedYear;
     if (data.format) book.format = data.format;
     if (data.pages) book.pages = data.pages;
     if (data.genres) book.genres = data.genres;

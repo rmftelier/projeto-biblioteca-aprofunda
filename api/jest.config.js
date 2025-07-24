@@ -8,4 +8,11 @@ module.exports = {
   transform: {
     ...tsJestTransformCfg,
   },
+  moduleNameMapper: {
+    '^@core/(.*)$': '<rootDir>/src/core/$1',
+    '^@infra/(.*)$': '<rootDir>/src/infra/$1',
+    '^@controllers/(.*)$': '<rootDir>/src/app/controllers/$1',
+    '^@routes/(.*)$': '<rootDir>/src/app/routes/$1',
+    '^@server/(.*)$': '<rootDir>/src/infra/server/$1'
+  }
 };

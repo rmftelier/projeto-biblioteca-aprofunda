@@ -7,7 +7,7 @@ export class CreateBookController {
     const {
       title,
       author,
-      publishedAt,
+      publishedYear,
       format,
       pages,
       genres,
@@ -16,7 +16,7 @@ export class CreateBookController {
     try {
       const createBook = new CreateBook(bookRepository);
 
-      const book = await createBook.execute({ title, author, publishedAt, format, pages, genres, language });
+      const book = await createBook.execute({ title, author, publishedYear, format, pages, genres, language });
 
       return res.status(201).json(book);
 

@@ -4,7 +4,7 @@ import { BookRepository } from "@core/repositories/BookRepository";
 export interface ICreateBookInput {
   title: string;
   author: string;
-  publishedAt: string;
+  publishedYear: number;
   format: string;
   pages: number;
   genres: string[];
@@ -16,12 +16,11 @@ export class CreateBook {
 
   async execute(data: ICreateBookInput): Promise<Book> {
 
-    const formattedDate = new Date(data.publishedAt + 'T00:00:00');
 
     const book = new Book(
       data.title,
       data.author,
-      formattedDate,
+      data.publishedYear,
       data.format,
       data.pages,
       data.genres,
