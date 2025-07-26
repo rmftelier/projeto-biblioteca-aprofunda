@@ -26,7 +26,7 @@ export class MongoUserRepository implements UserRepository {
   }
 
   async findByLogin(login: string): Promise<User | null> {
-    const doc = await userModel.find({ login });
+    const doc = await userModel.findOne({ login });
 
     return doc ? this.toEntity(doc) : null;
   }

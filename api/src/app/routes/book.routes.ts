@@ -4,8 +4,9 @@ import { GetBookByIdController } from "@app/controllers/books/GetBookByIdControl
 import { CreateBookController } from "@app/controllers/books/CreateBookController";
 import { UpdateBookByIdController } from "@app/controllers/books/UpdateBookByIdController";
 import { DeleteBookByIdController } from "@app/controllers/books/DeleteBookByIdController";
+import { autenticar } from '@shared/middlewares/authMiddleware';
 
-const router = Router();
+const bookRoutes = Router();
 
 const getAllBooksController = new GetAllBooksController();
 const getBookByIdController = new GetBookByIdController();
@@ -13,27 +14,27 @@ const createBookController = new CreateBookController();
 const updateBookByIdController = new UpdateBookByIdController();
 const deleteBookByIdController = new DeleteBookByIdController();
 
-router.get("/books", async (req, res) => {
+bookRoutes.get("/books", async (req, res) => {
   await getAllBooksController.handle(req, res);
 });
 
-router.get("/books/:id", async (req, res) => {
+bookRoutes.get("/books/:id", async (req, res) => {
   await getBookByIdController.handle(req, res);
 });
 
-router.post("/books", async (req, res) => {
+bookRoutes.post("/books", autenticar, async (req, res) => {
   await createBookController.handle(req, res);
 });
 
-router.patch("/books/:id", async (req, res) => {
+bookRoutes.patch("/books/:id", autenticar, async (req, res) => {
   await updateBookByIdController.handle(req, res);
 });
 
-router.delete("/books/:id", async (req, res) => {
+bookRoutes.delete("/books/:id", autenticar, async (req, res) => {
   await deleteBookByIdController.handle(req, res);
 })
 
-export { router as bookRoutes };
+export { bookRoutes };
 
 
 
