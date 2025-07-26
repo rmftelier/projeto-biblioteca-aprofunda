@@ -22,14 +22,7 @@ export class UpdateBook {
 
     if (data.title) book.title = data.title;
     if (data.author) book.author = data.author;
-<<<<<<<< HEAD:api/src/core/usecases/books/UpdateBook.ts
     if (data.publishedYear) book.publishedYear = data.publishedYear;
-========
-    if (data.publishedAt) {
-      const formattedDate = new Date(data.publishedAt + 'T00:00:00');
-      book.publishedAt = formattedDate;
-    };
->>>>>>>> main:api/src/core/usecases/UpdateBook.ts
     if (data.format) book.format = data.format;
     if (data.pages) book.pages = data.pages;
     if (data.genres) book.genres = data.genres;
