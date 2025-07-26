@@ -29,7 +29,7 @@ userRoutes.get("/users/:id", async (req, res) => {
   await getUserByIdController.handle(req, res);
 });
 
-userRoutes.post("/users", autenticar, async (req, res) => {
+userRoutes.post("/users", async (req, res) => {
   await createUserController.handle(req, res);
 });
 

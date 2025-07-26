@@ -1,5 +1,6 @@
 import { User } from "@core/entities/User";
 import { UserRepository } from "@core/repositories/UserRepository";
+import bcrypt from "bcrypt";
 
 export interface ICreateUserInput {
   name: string,
@@ -13,10 +14,12 @@ export class CreateUser {
 
   async execute(data: ICreateUserInput): Promise<User> {
 
+    const hashPassword = await bcrypt.hash(data.password, 10);
+
     const user = new User(
       data.name,
       data.login,
-      data.password,
+      hashPassword,
       data.email
     );
 

@@ -1,5 +1,6 @@
 import { UserRepository } from "@core/repositories/UserRepository";
-import { geraToken } from "@shared/helpers/jwt";
+import { gerarToken } from "@shared/helpers/jwt";
+import bcrypt from "bcrypt";
 
 interface IAuthInput {
   login: string,
@@ -16,7 +17,13 @@ export class AuthUser {
       throw new Error("Credenciais inválidas");
     }
 
-    const token = geraToken({ userId: user.id, login: user.login });
+    const comparedPassword = await bcrypt.compare(password, user.password);
+
+    if (!comparedPassword) {
+      throw new Error("Senha inválida");
+    }
+
+    const token = gerarToken({ userId: user.id, login: user.login });
 
     return token;
   }

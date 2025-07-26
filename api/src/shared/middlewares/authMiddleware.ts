@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-const JWT_SECRET = process.env.JWT_SECRET || 'default';
+import { validarToken } from '@shared/helpers/jwt';
 
 export function autenticar(req: Request, res: Response, nextFunction: NextFunction) {
   const authHeader = req.headers.authorization;
@@ -12,8 +11,7 @@ export function autenticar(req: Request, res: Response, nextFunction: NextFuncti
   const token = authHeader.split(" ")[1];
 
   try {
-    const payload = jwt.verify(token, JWT_SECRET);
-    console.log(payload);
+    const payload = validarToken(token);
     req.user = payload;
     nextFunction();
 
