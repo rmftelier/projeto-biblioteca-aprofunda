@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { GetBookById } from '@core/usecases/books/GetBookById';
 import { bookRepository } from '@infra/database/repositoryInstance';
 
-
 export class GetBookByIdController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
