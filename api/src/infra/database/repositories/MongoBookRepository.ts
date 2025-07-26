@@ -8,7 +8,7 @@ export class MongoBookRepository implements BookRepository {
     return new Book(
       doc.title,
       doc.author,
-      doc.publishedAt,
+      doc.publishedYear,
       doc.format,
       doc.pages,
       doc.genres,
@@ -40,7 +40,7 @@ export class MongoBookRepository implements BookRepository {
       {
         title: book.title,
         author: book.author,
-        publishedAt: book.publishedAt,
+        publishedYear: book.publishedYear,
         format: book.format,
         pages: book.pages,
         genres: book.genres,

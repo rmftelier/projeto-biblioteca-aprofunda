@@ -7,6 +7,6 @@ export class Book {
     public pages: number,
     public genres: string[],
     public language: string,
-    public id?: string,
+    public id?: string
   ) { }
 }

@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const bookSchema = new Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
-  publishedAt: { type: Date },
+  publishedYear: { type: Number },
   format: { type: String },
   pages: { type: Number },
   genres: { type: Array },

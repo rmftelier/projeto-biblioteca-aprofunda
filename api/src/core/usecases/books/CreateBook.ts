@@ -15,8 +15,7 @@ export class CreateBook {
   constructor(private bookRepository: BookRepository) { }
 
   async execute(data: ICreateBookInput): Promise<Book> {
-
-
+    
     const book = new Book(
       data.title,
       data.author,
