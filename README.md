@@ -114,8 +114,8 @@ A API implementa autenticação via Bearer Token (JWT) e autorização baseada e
 
 | Método | Rota         | Autenticação | Papel exigido     | Descrição              |
 | ------ | ------------ | ------------ | ----------------- | ---------------------- |
-| GET    | `/books`     | ✅            | `user` ou `admin` | Listar todos os livros |
-| GET    | `/books/:id` | ✅            | `user` ou `admin` | Buscar livro por ID    |
+| GET    | `/books`     | ❌           | - | Listar todos os livros |
+| GET    | `/books/:id` | ❌            | - | Buscar livro por ID    |
 | POST   | `/books`     | ✅            | `admin`           | Cadastrar novo livro   |
 | PATCH  | `/books/:id` | ✅            | `admin`           | Atualizar livro por ID |
 | DELETE | `/books/:id` | ✅            | `admin`           | Excluir livro por ID   |
@@ -197,8 +197,6 @@ Corpo (Body):
 
 ```
   GET http://localhost:3000/books
-  Headers:
-  Authorization: Bearer seu_token_jwt
 ```
 
 **Resposta:**
@@ -259,8 +257,6 @@ Corpo (Body):
 
 ```
   GET http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
-  Headers:
-  Authorization: Bearer seu_token_jwt
 ```
 
 **Resposta:**
