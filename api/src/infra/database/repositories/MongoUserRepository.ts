@@ -10,6 +10,7 @@ export class MongoUserRepository implements UserRepository {
       doc.login,
       doc.password,
       doc.email,
+      doc.role,
       doc._id.toString()
     )
   }

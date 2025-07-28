@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { validarToken } from '@shared/helpers/jwt';
+import { verifyToken } from '@shared/helpers/jwt';
 
-export function autenticar(req: Request, res: Response, nextFunction: NextFunction) {
+export function authenticate(req: Request, res: Response, nextFunction: NextFunction) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     res.status(401).json({ error: "Token não enviado" });
@@ -11,7 +11,7 @@ export function autenticar(req: Request, res: Response, nextFunction: NextFuncti
   const token = authHeader.split(" ")[1];
 
   try {
-    const payload = validarToken(token);
+    const payload = verifyToken(token);
     req.user = payload;
     nextFunction();
 

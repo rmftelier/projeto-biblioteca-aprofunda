@@ -4,7 +4,8 @@ import { GetBookByIdController } from "@app/controllers/books/GetBookByIdControl
 import { CreateBookController } from "@app/controllers/books/CreateBookController";
 import { UpdateBookByIdController } from "@app/controllers/books/UpdateBookByIdController";
 import { DeleteBookByIdController } from "@app/controllers/books/DeleteBookByIdController";
-import { autenticar } from '@shared/middlewares/authMiddleware';
+import { authenticate } from '@shared/middlewares/authMiddleware';
+import { isAdmin } from '@shared/middlewares/roleMiddleware';
 
 const bookRoutes = Router();
 
@@ -22,15 +23,15 @@ bookRoutes.get("/books/:id", async (req, res) => {
   await getBookByIdController.handle(req, res);
 });
 
-bookRoutes.post("/books", autenticar, async (req, res) => {
+bookRoutes.post("/books", authenticate, isAdmin, async (req, res) => {
   await createBookController.handle(req, res);
 });
 
-bookRoutes.patch("/books/:id", autenticar, async (req, res) => {
+bookRoutes.patch("/books/:id", authenticate, isAdmin, async (req, res) => {
   await updateBookByIdController.handle(req, res);
 });
 
-bookRoutes.delete("/books/:id", autenticar, async (req, res) => {
+bookRoutes.delete("/books/:id", authenticate, isAdmin, async (req, res) => {
   await deleteBookByIdController.handle(req, res);
 })
 

@@ -1,5 +1,5 @@
 import { UserRepository } from "@core/repositories/UserRepository";
-import { gerarToken } from "@shared/helpers/jwt";
+import { generateToken } from "@shared/helpers/jwt";
 import bcrypt from "bcrypt";
 
 interface IAuthInput {
@@ -23,7 +23,7 @@ export class AuthUser {
       throw new Error("Senha inválida");
     }
 
-    const token = gerarToken({ userId: user.id, login: user.login });
+    const token = generateToken({ userId: user.id, login: user.login, role: user.role });
 
     return token;
   }
