@@ -23,6 +23,9 @@
       "@infra/*": [
         "infra/*"
       ],
+      "@shared/*": [
+        "shared/*"
+      ]
     }
   },
   "include": [

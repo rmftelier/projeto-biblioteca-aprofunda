@@ -10,6 +10,7 @@ export class MongoUserRepository implements UserRepository {
       doc.login,
       doc.password,
       doc.email,
+      doc.role,
       doc._id.toString()
     )
   }
@@ -26,7 +27,7 @@ export class MongoUserRepository implements UserRepository {
   }
 
   async findByLogin(login: string): Promise<User | null> {
-    const doc = await userModel.find({ login });
+    const doc = await userModel.findOne({ login });
 
     return doc ? this.toEntity(doc) : null;
   }

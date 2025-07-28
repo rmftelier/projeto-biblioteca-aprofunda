@@ -4,6 +4,7 @@ export class User {
     public login: string,
     public password: string,
     public email: string,
+    public role: 'admin' | 'user' = 'user',
     public id?: string
   ) { }
 }
