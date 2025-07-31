@@ -8,6 +8,7 @@ const bookSchema = new Schema({
   pages: { type: Number },
   genres: { type: Array },
   language: { type: String },
+  status: { type: String, enum: ['available', 'borrowed'], default: 'available' },
   createdAt: { type: Date, default: Date.now }
 });
 

@@ -11,6 +11,7 @@ export class MongoUserRepository implements UserRepository {
       doc.password,
       doc.email,
       doc.role,
+      doc.borrowedBooksId.map((id: any) => id.toString()),
       doc._id.toString()
     )
   }
@@ -45,7 +46,8 @@ export class MongoUserRepository implements UserRepository {
       name: user.name,
       login: user.login,
       password: user.password,
-      email: user.email
+      email: user.email,
+      borrowedBooksId: user.borrowedBooksId
     },
       { new: true }
     );
