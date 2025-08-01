@@ -18,7 +18,8 @@ describe('DeleteBook (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
-      '1',
+      'available',
+      '1'
     );
 
     await bookRepository.save(book);

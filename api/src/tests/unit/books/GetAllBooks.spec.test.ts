@@ -19,6 +19,7 @@ describe('GetAllBooks (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
+      'available',
       '1',
     );
 

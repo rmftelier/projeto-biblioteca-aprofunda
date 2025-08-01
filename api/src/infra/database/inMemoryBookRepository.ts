@@ -14,6 +14,12 @@ export class InMemoryBookRepository implements BookRepository {
     return book || null;
   }
 
+  async findByTitle(title: string): Promise<Book | null> {
+    const book = this.books.find((book) => book.title === title);
+
+    return book || null;
+  }
+
   async save(book: Book): Promise<Book> {
 
     const existingIndex = this.books.findIndex(b => b.id == book.id);

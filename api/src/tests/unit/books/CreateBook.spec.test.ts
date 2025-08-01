@@ -25,6 +25,7 @@ describe('CreateBook (UseCase)', () => {
 
     expect(book).toBeInstanceOf(Book);
     expect(book.title).toBe('Jurassic Park');
+    expect(book.status).toBe('available');
     expect(book.genres.every(item => typeof item === 'string')).toBe(true);
     expect(bookRepository.books).toHaveLength(1);
   })

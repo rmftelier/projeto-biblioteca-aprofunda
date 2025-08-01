@@ -19,7 +19,8 @@ describe('InMemoryBookRepository', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
-      '1',
+      'available',
+      '1'
     );
 
     await bookRepository.save(originalBook);
@@ -32,7 +33,8 @@ describe('InMemoryBookRepository', () => {
       400,
       ['Aventura'],
       'Português',
-      '1', // mesmo ID
+      'available',
+      '1' // mesmo ID
     );
 
     await bookRepository.update(updatedBook);
@@ -53,6 +55,7 @@ describe('InMemoryBookRepository', () => {
       100,
       ['Fantasia'],
       'Português',
+      'available',
       '999' // ID que não foi salvo antes
     );
 
@@ -73,7 +76,8 @@ describe('InMemoryBookRepository', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
-      '1',
+      'available',
+      '1'
     );
 
     await bookRepository.save(originalBook);
@@ -86,7 +90,8 @@ describe('InMemoryBookRepository', () => {
       377,
       ['Thriller', 'Mistério', 'Ficção'],
       'Português',
-      '1',
+      'available',
+      '1'
     );
 
     const savedBook = await bookRepository.save(updatedBook);
@@ -95,6 +100,37 @@ describe('InMemoryBookRepository', () => {
     expect(bookRepository.books[0].title).toBe('Sem Saída');
     expect(savedBook).toEqual(updatedBook);
 
+  });
+
+
+  it('deve encontrar um livro pelo título', async () => {
+    const book = new Book(
+      'Jurassic Park',
+      'Michael Crichton',
+      2015,
+      'Físico',
+      528,
+      ['Ficção Científica', 'Ação', 'Aventura'],
+      'Português',
+      'available',
+      '1',
+    );
+
+    await bookRepository.save(book);
+
+    const getBookByTitle = await bookRepository.findByTitle(book.title);
+
+    expect(getBookByTitle?.title).toBe('Jurassic Park');
+    expect(getBookByTitle?.id).toBe('1');
+    expect(getBookByTitle?.pages).toBe(528);
+    expect(getBookByTitle?.status).toBe('available');
+  });
+
+  it('deve retornar null se o livro com o título não for encontrado', async () => {
+
+    const getBookByTitle = await bookRepository.findByTitle('Título inexistente');
+
+    expect(getBookByTitle).toBeNull();
   });
 
 });
