@@ -26,7 +26,7 @@ export class BorrowBook {
     }
 
     book.status = 'borrowed';
-    await this.bookRepository.update(book);
+    await this.bookRepository.update(book.id as string, book);
 
     user.borrowedBooksId.push(book.id!);
     await this.userRepository.update(user);

@@ -28,7 +28,7 @@ export class UpdateBook {
     if (data.genres) book.genres = data.genres;
     if (data.language) book.language = data.language;
 
-    const updatedBook = await this.bookRepository.update(book);
+    const updatedBook = await this.bookRepository.update(id, book);
 
     return updatedBook;
   }

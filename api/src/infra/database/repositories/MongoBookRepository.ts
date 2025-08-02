@@ -41,9 +41,9 @@ export class MongoBookRepository implements BookRepository {
     return this.toEntity(doc);
   }
 
-  async update(book: Book): Promise<Book | null> {
+  async update(id: string, book: Book): Promise<Book | null> {
     const doc = await bookModel.findByIdAndUpdate(
-      book.id,
+      id,
       {
         title: book.title,
         author: book.author,

@@ -30,7 +30,7 @@ export class ReturnBook {
     }
 
     book.status = "available";
-    await this.bookRepository.update(book);
+    await this.bookRepository.update(book.id as string, book);
 
     user.borrowedBooksId = user.borrowedBooksId.filter(
       (id) => id.toString() !== book.id

@@ -1,6 +1,6 @@
 import { Book } from "@core/entities/Book";
 import { GetBookById } from "@core/usecases/books/GetBookById";
-import { InMemoryBookRepository } from "@infra/database/inMemoryBookRepository";
+import { InMemoryBookRepository } from "@infra/database/repositories/inMemory/inMemoryBookRepository";
 
 describe('GetBookById (UseCase)', () => {
   let bookRepository: InMemoryBookRepository;

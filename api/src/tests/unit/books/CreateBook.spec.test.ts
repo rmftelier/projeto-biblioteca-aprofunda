@@ -1,6 +1,6 @@
 import { Book } from "@core/entities/Book";
 import { CreateBook } from "@core/usecases/books/CreateBook";
-import { InMemoryBookRepository } from "@infra/database/inMemoryBookRepository";
+import { InMemoryBookRepository } from "@infra/database/repositories/inMemory/inMemoryBookRepository";
 
 describe('CreateBook (UseCase)', () => {
 

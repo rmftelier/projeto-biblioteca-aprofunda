@@ -21,20 +21,13 @@ export class InMemoryBookRepository implements BookRepository {
   }
 
   async save(book: Book): Promise<Book> {
+    this.books.push(book);
+    return book;
 
-    const existingIndex = this.books.findIndex(b => b.id == book.id);
+  };
 
-    if (existingIndex >= 0) {
-      this.books[existingIndex] = book;
-      return this.books[existingIndex];
-    } else {
-      this.books.push(book);
-      return book;
-    }
-  }
-
-  async update(book: Book): Promise<Book | null> {
-    const index = this.books.findIndex((b) => b.id === book.id);
+  async update(id: string, book: Book): Promise<Book | null> {
+    const index = this.books.findIndex((b) => b.id === id);
 
     if (index !== -1) {
       this.books[index] = book

@@ -7,7 +7,8 @@ export interface ICreateUserInput {
   login: string,
   password: string,
   email: string,
-  role: 'admin' | 'user'
+  role: 'admin' | 'user',
+  borrowedBooksId: []
 }
 
 export class CreateUser {
@@ -22,7 +23,8 @@ export class CreateUser {
       data.login,
       hashPassword,
       data.email,
-      data.role
+      data.role,
+      data.borrowedBooksId
     );
 
     const newUser = await this.userRepository.save(user);
