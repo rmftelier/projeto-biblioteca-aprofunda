@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import express, { Application } from 'express';
 import cors from 'cors';
 import { bookRoutes } from '@app/routes/book.routes';

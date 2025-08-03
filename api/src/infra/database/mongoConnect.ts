@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-export async function connectToMongo() {
+export async function connectToMongo(URL: string) {
   try {
-    await mongoose.connect(process.env.MONGO_URI!);
+    await mongoose.connect(URL);
     console.log('🟢 Conectado ao MongoDB Atlas com sucesso.');
 
   } catch (error) {
