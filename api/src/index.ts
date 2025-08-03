@@ -1,8 +1,12 @@
 import app from "@infra/server/server";
 import { connectToMongo } from "@infra/database/mongoConnect";
+import { config } from "config/environment";
 
-connectToMongo().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`O servidor está rodando na porta: ${process.env.PORT}`);
+const PORT = config.port;
+const URL = config.mongoURL;
+
+connectToMongo(URL).then(() => {
+  app.listen(PORT, () => {
+    console.log(`O servidor está rodando na porta: ${PORT}`);
   });
 });
