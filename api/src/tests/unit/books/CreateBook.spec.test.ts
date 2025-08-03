@@ -1,6 +1,6 @@
 import { Book } from "@core/entities/Book";
 import { CreateBook } from "@core/usecases/books/CreateBook";
-import { InMemoryBookRepository } from "@infra/database/inMemoryBookRepository";
+import { InMemoryBookRepository } from "@infra/database/repositories/inMemory/inMemoryBookRepository";
 
 describe('CreateBook (UseCase)', () => {
 
@@ -25,6 +25,7 @@ describe('CreateBook (UseCase)', () => {
 
     expect(book).toBeInstanceOf(Book);
     expect(book.title).toBe('Jurassic Park');
+    expect(book.status).toBe('available');
     expect(book.genres.every(item => typeof item === 'string')).toBe(true);
     expect(bookRepository.books).toHaveLength(1);
   })

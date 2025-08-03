@@ -15,6 +15,10 @@ export class DeleteUserByIdController {
       return res.status(204).json({ message: "O usuário foi excluído com sucesso" });
 
     } catch (error: any) {
+      if (error.message === 'Usuário não encontrado') {
+        return res.status(404).json({ error: error.message });
+      }
+
       return res.status(500).json({ error: error.message });
     }
   }

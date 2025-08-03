@@ -13,6 +13,7 @@ export class MongoBookRepository implements BookRepository {
       doc.pages,
       doc.genres,
       doc.language,
+      doc.status,
       doc._id.toString()
     );
   }
@@ -28,15 +29,21 @@ export class MongoBookRepository implements BookRepository {
     return doc ? this.toEntity(doc) : null;
   }
 
+  async findByTitle(title: string): Promise<Book | null> {
+    const doc = await bookModel.findOne({ title });
+
+    return doc ? this.toEntity(doc) : null;
+  }
+
   async save(book: Book): Promise<Book> {
     const doc = await bookModel.create(book);
 
     return this.toEntity(doc);
   }
 
-  async update(book: Book): Promise<Book | null> {
+  async update(id: string, book: Book): Promise<Book | null> {
     const doc = await bookModel.findByIdAndUpdate(
-      book.id,
+      id,
       {
         title: book.title,
         author: book.author,
@@ -44,7 +51,8 @@ export class MongoBookRepository implements BookRepository {
         format: book.format,
         pages: book.pages,
         genres: book.genres,
-        language: book.language
+        language: book.language,
+        status: book.status
       },
       { new: true }
     );

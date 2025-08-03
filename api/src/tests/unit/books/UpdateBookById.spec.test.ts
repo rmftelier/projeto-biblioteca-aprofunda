@@ -1,6 +1,6 @@
 import { Book } from "@core/entities/Book";
 import { UpdateBook } from "@core/usecases/books/UpdateBook";
-import { InMemoryBookRepository } from "@infra/database/inMemoryBookRepository";
+import { InMemoryBookRepository } from "@infra/database/repositories/inMemory/inMemoryBookRepository";
 
 describe('UpdateBook (UseCase)', () => {
   let bookRepository: InMemoryBookRepository;
@@ -17,6 +17,7 @@ describe('UpdateBook (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
+      'available',
       '1'
     );
 
@@ -63,6 +64,7 @@ describe('UpdateBook (UseCase)', () => {
     await expect(
       updateBook.execute('99', { title: 'Novo Título' })
     ).rejects.toThrow('Livro não encontrado');
+    expect(updateBook)
 
   });
 

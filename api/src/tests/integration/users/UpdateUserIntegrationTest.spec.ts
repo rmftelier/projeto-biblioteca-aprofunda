@@ -3,9 +3,8 @@ import app from "@infra/server/server";
 import mongoose from "mongoose";
 import { Types } from "mongoose";
 import { userModel } from "@infra/database/models/mongooseUserModel";
-import { bookModel } from "@infra/database/models/mongooseBookModel";
 
-describe('PATCH /books/:id', () => {
+describe('PATCH /users/:id', () => {
   let token: string;
 
   beforeAll(async () => {
@@ -18,53 +17,59 @@ describe('PATCH /books/:id', () => {
 
   beforeEach(async () => {
     await userModel.deleteMany({});
-    await bookModel.deleteMany({});
+  });
 
-    await request(app).post('/register').send({
-      name: 'Admin',
-      login: 'admin',
-      password: 'admin123',
-      email: 'admin@example.com',
-      role: 'admin',
-      borrowedBooksId: []
-    });
+
+  it('deve alterar o nome do usuário', async () => {
+
+    const { body } = await request(app)
+      .post("/register")
+      .send({
+        name: 'Yaya Urassaya',
+        login: 'yaya',
+        password: '123456',
+        role: 'admin',
+        email: 'urassaya@email.com',
+        borrowedBooksId: []
+      });
 
     const login = await request(app).post('/login').send({
-      login: 'admin',
-      password: 'admin123'
+      login: 'yaya',
+      password: '123456'
     });
 
     token = login.body.token;
-  });
-
-
-  it('deve alterar o título do livro', async () => {
-
-    const { body } = await request(app)
-      .post("/books")
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: "Jurassic Park",
-        author: "Michael Crichton",
-        publishedYear: 2015,
-        format: "Físico",
-        pages: 528,
-        genres: ["Ficção Científica", "Ação", "Aventura"],
-        language: "Português"
-      });
 
     const response = await request(app)
-      .patch(`/books/${body.id}`)
+      .patch(`/users/${body.id}`)
       .set('Authorization', `Bearer ${token}`)
       .send({
-        title: "Orgulho e Preconceito"
+        name: "Yaya Urassaya Sperbund"
       });
 
     expect(response.status).toBe(200);
-    expect(response.body.book.title).toBe("Orgulho e Preconceito");
+    expect(response.body.user.name).toBe("Yaya Urassaya Sperbund");
   });
 
   it("deve retornar 404 quando o id for inválido", async () => {
+
+    const { body } = await request(app)
+      .post("/register")
+      .send({
+        name: 'Yaya Urassaya',
+        login: 'yaya',
+        password: '123456',
+        role: 'admin',
+        email: 'urassaya@email.com',
+        borrowedBooksId: []
+      });
+
+    const login = await request(app).post('/login').send({
+      login: 'yaya',
+      password: '123456'
+    });
+
+    token = login.body.token;
 
     const fakeId = new Types.ObjectId();
 

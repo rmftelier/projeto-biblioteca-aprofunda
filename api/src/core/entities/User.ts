@@ -5,6 +5,7 @@ export class User {
     public password: string,
     public email: string,
     public role: 'admin' | 'user' = 'user',
+    public borrowedBooksId: string[],
     public id?: string
   ) { }
 }

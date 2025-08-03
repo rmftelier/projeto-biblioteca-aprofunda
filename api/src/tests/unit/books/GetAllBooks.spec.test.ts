@@ -1,6 +1,6 @@
 import { Book } from "@core/entities/Book";
 import { GetAllBooks } from "@core/usecases/books/GetAllBooks";
-import { InMemoryBookRepository } from "@infra/database/inMemoryBookRepository";
+import { InMemoryBookRepository } from "@infra/database/repositories/inMemory/inMemoryBookRepository";
 
 describe('GetAllBooks (UseCase)', () => {
   let bookRepository: InMemoryBookRepository;
@@ -19,6 +19,7 @@ describe('GetAllBooks (UseCase)', () => {
       528,
       ['Ficção Científica', 'Ação', 'Aventura'],
       'Português',
+      'available',
       '1',
     );
 
