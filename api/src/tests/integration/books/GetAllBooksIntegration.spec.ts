@@ -1,7 +1,8 @@
 import request from "supertest";
 import app from "@infra/server/server";
 import mongoose from "mongoose";
-import { createTestAdminAndGetToken, clearDatabase } from "@tests/utils/setupTestUser";
+import { bookModel } from "@infra/database/models/mongooseBookModel";
+import { userModel } from "@infra/database/models/mongooseUserModel";
 
 describe('GET /books', () => {
   let token: string;
@@ -15,8 +16,24 @@ describe('GET /books', () => {
   });
 
   beforeEach(async () => {
-    await clearDatabase();
-    token = await createTestAdminAndGetToken();
+    await userModel.deleteMany({});
+    await bookModel.deleteMany({});
+
+    await request(app).post('/register').send({
+      name: 'Admin',
+      login: 'admin',
+      password: 'admin123',
+      email: 'admin@example.com',
+      role: 'admin',
+      borrowedBooksId: []
+    });
+
+    const login = await request(app).post('/login').send({
+      login: 'admin',
+      password: 'admin123'
+    });
+
+    token = login.body.token;
   });
 
   it('deve retornar todos os livros cadastrados com sucesso', async () => {
@@ -39,6 +56,5 @@ describe('GET /books', () => {
     expect(response.status).toBe(200);
     expect(response.body[0].title).toBe("Jurassic Park");
   });
-
 
 });

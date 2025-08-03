@@ -2,7 +2,8 @@ import request from "supertest";
 import app from "@infra/server/server";
 import mongoose from "mongoose";
 import { Types } from "mongoose";
-import { clearDatabase, createTestAdminAndGetToken } from "@tests/utils/setupTestUser";
+import { userModel } from "@infra/database/models/mongooseUserModel";
+import { bookModel } from "@infra/database/models/mongooseBookModel";
 
 describe("GET /books/:id", () => {
   let token: string;
@@ -16,8 +17,24 @@ describe("GET /books/:id", () => {
   });
 
   beforeEach(async () => {
-    await clearDatabase();
-    token = await createTestAdminAndGetToken();
+    await userModel.deleteMany({});
+    await bookModel.deleteMany({});
+
+    await request(app).post('/register').send({
+      name: 'Admin',
+      login: 'admin',
+      password: 'admin123',
+      email: 'admin@example.com',
+      role: 'admin',
+      borrowedBooksId: []
+    });
+
+    const login = await request(app).post('/login').send({
+      login: 'admin',
+      password: 'admin123'
+    });
+
+    token = login.body.token;
   });
 
   it('deve retornar o livro com o id correspondente corretamente', async () => {

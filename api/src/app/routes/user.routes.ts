@@ -37,7 +37,7 @@ router.get("/users/:id", authenticate, async (req, res) => {
   await getUserByIdController.handle(req, res);
 });
 
-router.patch("/users/:id", authenticate, isAdmin, async (req, res) => {
+router.patch("/users/:id", authenticate, async (req, res) => {
   await updateUserByIdController.handle(req, res);
 });
 

@@ -19,6 +19,11 @@ export class UpdateUserByIdController {
       });
 
     } catch (error: any) {
+
+      if (error.message === 'Usuário não encontrado') {
+        return res.status(404).json({ error: error.message });
+      }
+
       return res.status(500).json({ error: error.message });
     }
   }

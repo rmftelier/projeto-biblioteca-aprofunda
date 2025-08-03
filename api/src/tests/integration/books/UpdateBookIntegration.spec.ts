@@ -2,7 +2,8 @@ import request from "supertest";
 import app from "@infra/server/server";
 import mongoose from "mongoose";
 import { Types } from "mongoose";
-import { createTestAdminAndGetToken, clearDatabase } from "@tests/utils/setupTestUser";
+import { userModel } from "@infra/database/models/mongooseUserModel";
+import { bookModel } from "@infra/database/models/mongooseBookModel";
 
 describe('PATCH /books/:id', () => {
   let token: string;
@@ -16,9 +17,24 @@ describe('PATCH /books/:id', () => {
   });
 
   beforeEach(async () => {
-    await clearDatabase();
-    token = await createTestAdminAndGetToken();
+    await userModel.deleteMany({});
+    await bookModel.deleteMany({});
 
+    await request(app).post('/register').send({
+      name: 'Admin',
+      login: 'admin',
+      password: 'admin123',
+      email: 'admin@example.com',
+      role: 'admin',
+      borrowedBooksId: []
+    });
+
+    const login = await request(app).post('/login').send({
+      login: 'admin',
+      password: 'admin123'
+    });
+
+    token = login.body.token;
   });
 
 
@@ -30,7 +46,7 @@ describe('PATCH /books/:id', () => {
       .send({
         title: "Jurassic Park",
         author: "Michael Crichton",
-        publishedAt: "2015-06-12",
+        publishedYear: 2015,
         format: "Físico",
         pages: 528,
         genres: ["Ficção Científica", "Ação", "Aventura"],
@@ -49,6 +65,7 @@ describe('PATCH /books/:id', () => {
   });
 
   it("deve retornar 404 quando o id for inválido", async () => {
+
     const fakeId = new Types.ObjectId();
 
     const response = await request(app)
