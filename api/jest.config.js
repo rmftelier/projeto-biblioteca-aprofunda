@@ -13,6 +13,10 @@ module.exports = {
     '^@infra/(.*)$': '<rootDir>/src/infra/$1',
     '^@controllers/(.*)$': '<rootDir>/src/app/controllers/$1',
     '^@routes/(.*)$': '<rootDir>/src/app/routes/$1',
-    '^@server/(.*)$': '<rootDir>/src/infra/server/$1'
+    '^@server/(.*)$': '<rootDir>/src/infra/server/$1',
+    '^@app/(.*)$': '<rootDir>/src/app/$1',
+    '^@shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^@tests/(.*)$': '<rootDir>/src/tests/$1'
+
   }
 };

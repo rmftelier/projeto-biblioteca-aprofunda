@@ -9,7 +9,7 @@ export class CreateUserController {
     try {
       const createUser = new CreateUser(userRepository);
 
-      const user = await createUser.execute({ name, login, password, email, role});
+      const user = await createUser.execute({ name, login, password, email, role, borrowedBooksId: [] });
 
       return res.status(201).json(user);
 
