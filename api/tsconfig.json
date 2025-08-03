@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES2020",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
+    "target": "ES2020", // Diz ao TypeScript qual versão de JavaScript gerar. ES2020 tem suporte moderno (como async/await).
+    "module": "CommonJS", // Define o sistema de módulos usado. CommonJS é o padrão do Node.js.
+    "rootDir": "./src", // Indica onde está o código-fonte (normalmente sua pasta `src`).
+    "outDir": "./dist", // Define onde os arquivos compilados em JavaScript vão parar (a pasta `dist`).
+    "strict": true, // Ativa todas as verificações de tipo mais rigorosas (boa prática para evitar bugs).
+    "esModuleInterop": true, // Permite importar pacotes CommonJS (como o Express) usando `import` em vez de `require`.
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
