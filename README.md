@@ -19,8 +19,10 @@ API RESTful para gerenciamento de uma biblioteca, desenvolvida com Node.js, Expr
 
 - Cadastro de usuários e login com JWT;
 - Listagem de livros cadastrados (usuários autenticados);
+- Empréstimo e Devolução de livros (usuários autenticados);
 - Cadastro, atualização e remoção de livros (somente admins);
 - Controle de acesso com autenticação e autorização por papéis.
+
 
 ## Controle de Acesso
 
@@ -28,7 +30,7 @@ A API implementa autenticação via Bearer Token (JWT) e autorização baseada e
 
 | Papel   | Acesso                                                                 |
 |---------|------------------------------------------------------------------------|
-| `user`  | Pode visualizar a lista de livros e detalhes de livros específicos.    |
+| `user`  | Pode visualizar a lista de livros e detalhes de livros específicos, além da possibilidade de emprestar e devolver livros. |
 | `admin` | Pode criar, atualizar e excluir livros, além de listar e gerenciar usuários. |
 
 > ⚠️ Todas as rotas protegidas exigem token JWT no header:  
@@ -60,8 +62,6 @@ A API implementa autenticação via Bearer Token (JWT) e autorização baseada e
 | `language`         | string    | Idioma da versão do livro                         |
 | `createdAt`       | string    | Data da criação do objeto livro                   |
 
-
-
 ---
 
 ## Instalação 
@@ -75,7 +75,7 @@ A API implementa autenticação via Bearer Token (JWT) e autorização baseada e
 2. Acesse a pasta do projeto:
 
    ```bash
-    cd projeto-biblioteca-aprofunda/api
+    cd projeto-biblioteca-aprofunda
    ```
 
 3. Instale as dependências:
@@ -87,9 +87,10 @@ A API implementa autenticação via Bearer Token (JWT) e autorização baseada e
 4. Configure o arquivo `.env.example` com as variáveis necessárias e depois renomeie-o para `.env`:
 
     ```env
-     MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWrites=true&w=majority&appName=<appname>
+     MONGO_URL=mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWrites=true&w=majority&appName=<appname>
      JWT_SECRET=sua_chave_secreta
      PORT=3000
+     MONGO_URL_TEST=mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWrites=true&w=majority&appName=<appname>
     ```
 
 5. Inicie o servidor:
@@ -131,6 +132,8 @@ A API implementa autenticação via Bearer Token (JWT) e autorização baseada e
 | GET    | `/users/:id` | ✅            | `admin` ou `user dono` | Buscar usuário por ID    |
 | PATCH  | `/users/:id` | ✅            | `admin`                | Atualizar usuário por ID |
 | DELETE | `/users/:id` | ✅            | `admin`                | Excluir usuário por ID   |
+| POST | `/users/:id/borrowBook` | ✅            | -                | Empréstimo de um livro para um usuário  |
+| POST | `/users/:id/returnBook` | ✅            | -                | Devolução de um livro por um usuário  |
 
 
 ---
@@ -246,8 +249,7 @@ Corpo (Body):
         "Aventura"
     ],
     "language": "Português",
-    "id": "09eef7aa-74ff-46d9-9123-737bc2404519",
-    "createdAt": "09/07/2025"
+    "id": "6892ac561c61bb644b27798c"
 }
 ```
 
@@ -256,7 +258,7 @@ Corpo (Body):
 **Requisição:**
 
 ```
-  GET http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
+  GET http://localhost:3000/books/6892ac561c61bb644b27798c
 ```
 
 **Resposta:**
@@ -274,8 +276,7 @@ Corpo (Body):
         "Aventura"
     ],
     "language": "Português",
-    "id": "a40c5977-7f87-463b-9641-3aca53d9b99b",
-    "createdAt": "09/07/2025"
+    "id": "6892ac561c61bb644b27798c"
 }
 ```
 
@@ -285,7 +286,7 @@ Corpo (Body):
 **Requisição:**
 
 ```
-  PATCH http://localhost:3000/books/09eef7aa-74ff-46d9-9123-737bc2404519
+  PATCH http://localhost:3000/books/6892ac561c61bb644b27798c
   Headers:
   Authorization: Bearer seu_token_jwt
 ```
@@ -316,8 +317,7 @@ Corpo (Body):
             "Aventura"
         ],
         "language": "Português",
-        "id": "09eef7aa-74ff-46d9-9123-737bc2404519",
-        "createdAt": "09/07/2025"
+        "id": "6892ac561c61bb644b27798c"
     }
 }
 ```
@@ -337,6 +337,56 @@ Corpo (Body):
 204 NO CONTENT
 ```
 
+### Empréstimo de um Livro
+
+**Requisição:**
+
+```
+  POST http://localhost:3000/users/6887f894ff9f46d24fd5c768/borrowBook
+  Headers:
+  Authorization: Bearer seu_token_jwt
+```
+
+Corpo (Body):
+
+```json
+   {
+     "title": "A estranha Sally Diamond"
+   }
+```
+
+**Resposta:**
+
+{
+    "message": "Livro emprestado"
+}
+
+
+### Devolução de um Livro
+
+**Requisição:**
+
+```
+  POST http://localhost:3000/users/6887f894ff9f46d24fd5c768/returnBook
+  Headers:
+  Authorization: Bearer seu_token_jwt
+```
+
+Corpo (Body):
+
+```json
+   {
+     "title": "A estranha Sally Diamond"
+   }
+```
+
+**Resposta:**
+
+{
+    "message": "Livro devolvido com sucesso."
+}
+
+
 ---
 
 ## Tecnologias utilizadas
@@ -349,6 +399,7 @@ Corpo (Body):
 - Bcrypt para hashing de senhas
 - CORS (para permitir requisições cross-origin)
 - Jest e SuperTest (para testes unitários e de integração)
+- Render
 
 ---
 
