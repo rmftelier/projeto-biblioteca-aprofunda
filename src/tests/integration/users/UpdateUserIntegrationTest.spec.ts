@@ -8,7 +8,7 @@ describe('PATCH /users/:id', () => {
   let token: string;
 
   beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI_TEST!);
+    await mongoose.connect(process.env.MONGO_URL_TEST!);
   });
 
   afterAll(async () => {

@@ -6,7 +6,7 @@ import { userModel } from "@infra/database/models/mongooseUserModel";
 describe("POST /register", () => {
 
   beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI_TEST!);
+    await mongoose.connect(process.env.MONGO_URL_TEST!);
   });
 
   afterAll(async () => {
