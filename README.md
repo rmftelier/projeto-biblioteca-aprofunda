@@ -350,17 +350,18 @@ Corpo (Body):
 Corpo (Body):
 
 ```json
-   {
-     "title": "A estranha Sally Diamond"
-   }
+{
+   "title": "A estranha Sally Diamond"
+}
 ```
 
 **Resposta:**
 
+```
 {
-    "message": "Livro emprestado"
+   "message": "Livro emprestado"
 }
-
+```
 
 ### Devolução de um Livro
 
@@ -375,17 +376,18 @@ Corpo (Body):
 Corpo (Body):
 
 ```json
-   {
-     "title": "A estranha Sally Diamond"
-   }
+{
+   "title": "A estranha Sally Diamond"
+}
 ```
 
 **Resposta:**
 
+```
 {
-    "message": "Livro devolvido com sucesso."
+   "message": "Livro devolvido com sucesso."
 }
-
+```
 
 ---
 
