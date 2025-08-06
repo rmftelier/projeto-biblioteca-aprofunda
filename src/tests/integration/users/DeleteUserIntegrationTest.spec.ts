@@ -37,7 +37,6 @@ describe("DELETE /users/:id", () => {
       password: 'fontaine123'
     });
 
-    console.log(body.id);
     token = login.body.token;
 
     const response = await request(app)

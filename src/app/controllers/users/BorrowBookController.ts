@@ -6,8 +6,6 @@ export class BorrowBookController {
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-
-    console.log(id);
     const { title } = req.body;
 
     try {

@@ -5,11 +5,11 @@ const tsJestTransformCfg = createDefaultPreset().transform;
 /** @type {import("jest").Config} **/
 module.exports = {
   testEnvironment: "node",
+  testMatch: ["**/tests/**/*.spec.ts"],
   transform: {
     ...tsJestTransformCfg,
   },
-  setupFilesAfterEnv: ["<rootDir>src/tests/setup.ts"],
-  collectCoverageFrom: ["src/**/*.ts", "!src/**/*.d.ts", "!src/index.ts"],
+  setupFiles: ["<rootDir>/src/tests/jest.setup.js"],
   moduleNameMapper: {
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@infra/(.*)$': '<rootDir>/src/infra/$1',
